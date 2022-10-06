@@ -39,3 +39,10 @@ Basic sql command in code is executed successfully。
 
 This task is so far fully successful。  
 
+# Build RestApi
+
+ToDo: This program is to listen to incoming requests and is to respond to those requests!  
+
+## Conclusion
+
+In progress...
