@@ -9,7 +9,7 @@ Result of command `./mvnw clean install compile package generate-sources` is `BU
 Result of command `./mvnw exec:java` is `BUILD FAILURE` at all times。  
 
 Result of command `./mvnw exec:java@someID` is `BUILD SUCCESS` under following circumstances {  
-* Changes in file `pom.xml` in section with id="someID"。  
+* Changes in file `pom.xml`; added section with id="someID"。  
 * Class `com.onboarding.onboarding.Onboarding` is public。  
 * Command `SpringApplication.run(Onboarding.class, args)` is not run。  
 
