@@ -21,3 +21,13 @@ Program runs successfully so task is considered successful; however problems mig
 * Command `SpringApplication.run(Onboarding.class, args)` should not be run。  
 
 }。  
+
+# Installing postgreSQL
+
+Software `postgreSQL` is installed。  
+Command `psql --dbname="postgres"` runs successfully。  
+
+## Conclusion
+
+This task is so far fully successful。  
+
