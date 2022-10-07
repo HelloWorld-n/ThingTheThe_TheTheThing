@@ -95,6 +95,7 @@ public class WebSite {
 		} catch (SQLException e) {
 			System.err.print("\u001B[48;02;255;0;0m\u001B[38;02;0;0;0m[ERROR]\u001B[0m Can't run query!\n");
 		}
+		result += "]";
 		return result;
 	}
 
