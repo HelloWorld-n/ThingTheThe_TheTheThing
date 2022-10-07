@@ -42,8 +42,7 @@ This task is so far fully successful。
 # Build RestApi
 
 Selecting `com.onboarding.onboarding.WebSite`'s methods that are annotated with `com.onboarding.onboarding.WebPage` and no other method is successful。  
-
-ToDo: Select `com.onboarding.onboarding.WebSite`'s method with specified annotation's `page`。  
+Selecting `com.onboarding.onboarding.WebSite`'s method with specified annotation's `address` is successful。  
 
 ToDo: This program is to listen to incoming requests and is to respond to those requests。  
 

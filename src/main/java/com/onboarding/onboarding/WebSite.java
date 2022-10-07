@@ -17,12 +17,12 @@ public class WebSite {
 		return webSite;
 	}
 
-	@WebPage(page = "/")
+	@WebPage(address = "/")
 	public String index() {
 		return "[\"Hi!\"]";
 	}
 	
-	@WebPage(page = "/check")
+	@WebPage(address = "/check")
 	public String page__check() {
 		String result = "[";
 		try {
@@ -47,7 +47,7 @@ public class WebSite {
 				}
 			}
 		} catch (SQLException e) {
-			System.out.print("\u001B[48;02;255;0;0m\u001B[38;02;0;0;0m[ERROR]\u001B[0m Can't run query!\n");
+			System.err.print("\u001B[48;02;255;0;0m\u001B[38;02;0;0;0m[ERROR]\u001B[0m Can't run query!\n");
 		}
 		result += "]";
 		return result;

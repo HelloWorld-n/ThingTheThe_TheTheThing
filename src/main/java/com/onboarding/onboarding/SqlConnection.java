@@ -29,7 +29,6 @@ public class SqlConnection {
 					DbContract.PASSWORD
 				);
 			}
-            System.out.println("DB connected");
              
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
