@@ -23,3 +23,6 @@ JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/
 ./mvnw exec:java@someID
 ```
 
+# Info  
+
+For best performance check `/prepare`。   
