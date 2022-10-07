@@ -61,8 +61,9 @@ class OnboardingServer {
 				) + (
 					" [" + addr.getHostAddress() + "]:" + port + address
 				));
-				System.out.print(loadPage(address));
-				out.print(loadPage(address));
+				String subdirectory = address.split("\\?")[0];
+				System.out.print(loadPage(subdirectory));
+				out.print(loadPage(subdirectory));
 				out.flush();
 				socket.close();
 			}
