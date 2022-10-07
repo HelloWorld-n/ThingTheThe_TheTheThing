@@ -44,9 +44,8 @@ This task is so far fully successful。
 Selecting `com.onboarding.onboarding.WebSite`'s methods that are annotated with `com.onboarding.onboarding.WebPage` and no other method is successful。  
 Selecting `com.onboarding.onboarding.WebSite`'s method with specified annotation's `address` is successful。  
 Program listens to incoming requests、 fetching address's subdirectory is successfull。  
-
-ToDo: This program Respond to those requests。  
+Program responds to those requests。  
 
 ## Conclusion
 
-In progress...
+This task is so far fully successful。  

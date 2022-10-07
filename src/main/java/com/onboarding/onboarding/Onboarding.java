@@ -25,7 +25,7 @@ class OnboardingServer {
 
 	public static String loadPage(String address){
 		WebSite webSite = WebSite.create();
-		String result = "Content-Type: application/json; charset=utf-8\n\n";
+		String result = "Content-Type: application/json\ncharset=utf-8\n\n";
 		for (Method method : webSite.getClass().getDeclaredMethods()) {
 			try {
 				if (method.isAnnotationPresent(WebPage.class)) {
@@ -38,7 +38,7 @@ class OnboardingServer {
 			} catch(IllegalAccessException | InvocationTargetException e){
 			}
 		}
-		return result;
+		return result + "\n";
 	}
 
 	public static void listen() {
@@ -61,7 +61,9 @@ class OnboardingServer {
 				) + (
 					" [" + addr.getHostAddress() + "]:" + port + address
 				));
+				System.out.print(loadPage(address));
 				out.print(loadPage(address));
+				out.flush();
 				socket.close();
 			}
 		} catch (IOException e) {
