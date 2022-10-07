@@ -35,26 +35,88 @@ public class WebSite {
 		return result;
 	}
 
+	@WebPage(address = "/prepare")
+	public String page__prepare() {
+		String result = "{";
+		try {
+			SqlConnection.sqlConnect();
+			SqlConnection.execAlteringQuery(
+				"CREATE TABLE randomThing(" + (
+					"id SERIAL PRIMARY KEY" 
+				) + ", " + (
+					"value int NOT NULL"
+				) + ");"
+			);
+			result += "\"randomThing\": \"added\", ";
+		} catch (SQLException e){
+			result += "\"randomThing\": \"kept\", ";
+			
+		}
+		result += "}";
+		return result;
+	}	
+	
+	@WebPage(address = "/fill/randomThing")
+	public String page__fill_randomThing() {
+		String result = "[";
+		try {
+			SqlConnection.sqlConnect();
+			SqlConnection.execAlteringQuery(
+				"INSERT INTO randomThing(" + (
+					"value" 
+				) + ") VALUES (" + (
+					"floor(random() * 16)"
+				) + ");"
+			);
+		} catch (SQLException e){			
+		}
+		result += "]";
+		return result;
+	}
+
+	@WebPage(address = "/fetch/randomThing")
+	public String page__fetch_randomThing() {
+		String result = "[";
+		try {
+			SqlConnection.sqlConnect();
+			ResultSet sqlResult = SqlConnection.execQuery("SELECT value FROM randomThing;");
+			
+			sqlResult.next();
+			while (true) {
+				result += "[" + (
+					Integer.toString(sqlResult.getInt(1))
+				) + "]";
+				if (sqlResult.next()){
+					result += ", ";
+				} else {
+					break;
+				}
+			}
+		} catch (SQLException e) {
+			System.err.print("\u001B[48;02;255;0;0m\u001B[38;02;0;0;0m[ERROR]\u001B[0m Can't run query!\n");
+		}
+		return result;
+	}
 
 	@WebPage(address = "/check")
 	public String page__check() {
 		String result = "[";
 		try {
 			SqlConnection.sqlConnect();
-			ResultSet rs = SqlConnection.execQuery("SELECT 3 + 5, 3 - 5, 3 * 5, 3 / 5;");
+			ResultSet sqlResult = SqlConnection.execQuery("SELECT 3 + 5, 3 - 5, 3 * 5, 3 / 5;");
 			
-			rs.next();
+			sqlResult.next();
 			while (true) {
 				result += "[" + (
-					Integer.toString(rs.getInt(1))
+					Integer.toString(sqlResult.getInt(1))
 				) + ", " + (
-					Integer.toString(rs.getInt(2))
+					Integer.toString(sqlResult.getInt(2))
 				) + ", " + (
-					Integer.toString(rs.getInt(3))
+					Integer.toString(sqlResult.getInt(3))
 				) + ", " + (
-					Integer.toString(rs.getInt(4))
+					Integer.toString(sqlResult.getInt(4))
 				) + "]";
-				if (rs.next()){
+				if (sqlResult.next()){
 					result += ", ";
 				} else {
 					break;
@@ -72,20 +134,20 @@ public class WebSite {
 		String result = "[";
 		try {
 			SqlConnection.sqlConnect();
-			ResultSet rs = SqlConnection.execQuery("SELECT random() > 0.5, random() > 0.5, random() > 0.5, random() > 0.5;");
+			ResultSet sqlResult = SqlConnection.execQuery("SELECT random() > 0.5, random() > 0.5, random() > 0.5, random() > 0.5;");
 			
-			rs.next();
+			sqlResult.next();
 			while (true) {
 				result += "[" + (
-					Boolean.toString(rs.getBoolean(1))
+					Boolean.toString(sqlResult.getBoolean(1))
 				) + ", " + (
-					Boolean.toString(rs.getBoolean(2))
+					Boolean.toString(sqlResult.getBoolean(2))
 				) + ", " + (
-					Boolean.toString(rs.getBoolean(3))
+					Boolean.toString(sqlResult.getBoolean(3))
 				) + ", " + (
-					Boolean.toString(rs.getBoolean(4))
+					Boolean.toString(sqlResult.getBoolean(4))
 				) + "]";
-				if (rs.next()){
+				if (sqlResult.next()){
 					result += ", ";
 				} else {
 					break;

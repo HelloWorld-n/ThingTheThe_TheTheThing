@@ -40,4 +40,11 @@ public class SqlConnection {
 		return sqlConnection.createStatement().executeQuery(query);
 	}
 
+	public static ResultSet execAlteringQuery(String query) throws SQLException {
+		ResultSet result = sqlConnection.createStatement().executeQuery(query);
+		sqlConnection.commit();
+		return result;
+
+	}
+
 }
