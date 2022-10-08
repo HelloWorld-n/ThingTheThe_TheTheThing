@@ -3,9 +3,25 @@ package com.onboarding.onboarding;
 import java.lang.reflect.Method;
 import java.sql.ResultSet;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 
+@CrossOrigin(origins = "http://[::1]:8080")
+@RestController
+@RequestMapping("/")
 public class WebSite {
 
 	private static WebSite webSite = null;
@@ -20,14 +36,14 @@ public class WebSite {
 		return webSite;
 	}
 
-	@WebPage(address = "/")
-	public String index() {
+	@GetMapping("/")
+	public String index(ModelMap Model) {
 		String result = "[";
 		WebSite webSite = WebSite.create();
 		for (Method method : webSite.getClass().getDeclaredMethods()) {
-			if (method.isAnnotationPresent(WebPage.class)) {
-				WebPage webPage = method.getAnnotation(WebPage.class);
-				String addressString = webPage.address();
+			if (method.isAnnotationPresent(GetMapping.class)) {
+				GetMapping getMapping = method.getAnnotation(GetMapping.class);
+				String addressString = getMapping.value()[0];
 				result += "\"" + addressString + "\", ";
 			}
 		}
@@ -35,8 +51,8 @@ public class WebSite {
 		return result;
 	}
 
-	@WebPage(address = "/prepare")
-	public String page__prepare() {
+	@GetMapping("/prepare")
+	public String page__prepare(ModelMap Model) {
 		String result = "{";
 		try {
 			SqlConnection.sqlConnect();
@@ -56,8 +72,8 @@ public class WebSite {
 		return result;
 	}	
 	
-	@WebPage(address = "/fill/randomThing")
-	public String page__fill_randomThing() {
+	@GetMapping("/fill/randomThing")
+	public String page__fill_randomThing(ModelMap Model) {
 		String result = "[";
 		try {
 			SqlConnection.sqlConnect();
@@ -74,8 +90,8 @@ public class WebSite {
 		return result;
 	}
 
-	@WebPage(address = "/fetch/randomThing")
-	public String page__fetch_randomThing() {
+	@GetMapping("/fetch/randomThing")
+	public String page__fetch_randomThing(ModelMap Model) {
 		String result = "[";
 		try {
 			SqlConnection.sqlConnect();
@@ -99,8 +115,8 @@ public class WebSite {
 		return result;
 	}
 
-	@WebPage(address = "/check")
-	public String page__check() {
+	@GetMapping("/check")
+	public String page__check(ModelMap Model) {
 		String result = "[";
 		try {
 			SqlConnection.sqlConnect();
@@ -130,8 +146,8 @@ public class WebSite {
 		return result;
 	}
 
-	@WebPage(address = "/randomBoolean")
-	public String page__randomBoolean() {
+	@GetMapping("/randomBoolean")
+	public String page__randomBoolean(ModelMap Model) {
 		String result = "[";
 		try {
 			SqlConnection.sqlConnect();
@@ -159,6 +175,11 @@ public class WebSite {
 		}
 		result += "]";
 		return result;
+	}
+
+	@GetMapping("/error")
+	public String page__error(ModelMap Model) {
+		return "<h1>Error</h1>";
 	}
 	
 }
