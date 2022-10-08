@@ -10,6 +10,7 @@ import java.lang.reflect.Method;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
 
 import java.net.InetAddress;
 import java.net.ServerSocket;
@@ -33,10 +34,5 @@ public class Onboarding {
 
 		springApplication.run();
 
-		/*
-		System.out.print("\u001B[48;02;255;255;255m\u001B[38;02;0;0;0m[BEGIN]\u001B[0m\n");
-		OnboardingServer.listen();
-		System.out.print("\u001B[48;02;255;255;255m\u001B[38;02;0;0;0m[END]\u001B[0m\n");
-		*/
 	}
 }

@@ -44,7 +44,6 @@ public class SqlConnection {
 		ResultSet result = sqlConnection.createStatement().executeQuery(query);
 		sqlConnection.commit();
 		return result;
-
 	}
 
 }

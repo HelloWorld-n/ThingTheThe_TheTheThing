@@ -3,7 +3,6 @@ package com.onboarding.onboarding;
 import java.lang.reflect.Method;
 import java.sql.ResultSet;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -54,6 +53,9 @@ public class WebSite {
 	@GetMapping("/prepare")
 	public String page__prepare(ModelMap Model) {
 		String result = "{";
+
+		
+			System.out.print("[randomThing]");//temp
 		try {
 			SqlConnection.sqlConnect();
 			SqlConnection.execAlteringQuery(
@@ -66,8 +68,9 @@ public class WebSite {
 			result += "\"randomThing\": \"added\", ";
 		} catch (SQLException e){
 			result += "\"randomThing\": \"kept\", ";
-			
 		}
+		
+		
 		result += "}";
 		return result;
 	}	
