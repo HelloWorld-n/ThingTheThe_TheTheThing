@@ -54,8 +54,6 @@ public class WebSite {
 	public String page__prepare(ModelMap Model) {
 		String result = "{";
 
-		
-			System.out.print("[randomThing]");//temp
 		try {
 			SqlConnection.sqlConnect();
 			SqlConnection.execAlteringQuery(
@@ -70,7 +68,7 @@ public class WebSite {
 			result += "\"randomThing\": \"kept\", ";
 		}
 		
-		
+
 		result += "}";
 		return result;
 	}	
