@@ -3,11 +3,11 @@
 Command is split into `SpringApplication springApplication = new SpringApplication(Onboarding.class);`, `springApplication.run();`。  
 Error is located at `springApplication.run();`。  
 Error has been fixed。  
-Program connects to browser、 pending restructuring page。
+All known problems are gone。  
 
 ## Conclusion  
 
-In progress。
+Success。  
 
 # Make class as postgres sql table  
 
