@@ -1,6 +1,5 @@
 package com.onboarding.onboarding;
 
-import java.lang.reflect.Method;
 import java.sql.ResultSet;
 
 import org.springframework.http.ResponseEntity;
@@ -36,18 +35,8 @@ public class WebSite {
 	}
 
 	@GetMapping("/")
-	public String index(ModelMap Model) {
-		String result = "[";
-		WebSite webSite = WebSite.create();
-		for (Method method : webSite.getClass().getDeclaredMethods()) {
-			if (method.isAnnotationPresent(GetMapping.class)) {
-				GetMapping getMapping = method.getAnnotation(GetMapping.class);
-				String addressString = getMapping.value()[0];
-				result += "\"" + addressString + "\", ";
-			}
-		}
-		result += "]";
-		return result;
+	public String index(ModelMap model) {
+		return PageUtil.fetchAllPages(WebSite.class, model);
 	}
 
 	@GetMapping("/prepare")

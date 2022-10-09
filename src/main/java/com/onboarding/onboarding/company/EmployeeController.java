@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.onboarding.onboarding.SqlConnection;
+import com.onboarding.onboarding.PageUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -41,26 +42,19 @@ public class EmployeeController {
 		}
 		return employeeController;
 	}
+
 	@GetMapping("/")
-	public String index(ModelMap Model) {
-		String result = "[";
+	public String index(ModelMap model) {
 		EmployeeController employeeController = EmployeeController.create();
-		for (Method method : employeeController.getClass().getDeclaredMethods()) {
-			if (method.isAnnotationPresent(GetMapping.class)) {
-				GetMapping getMapping = method.getAnnotation(GetMapping.class);
-				String addressString = getMapping.value()[0];
-				result += "\"" + addressString + "\", ";
-			}
-		}
-		result += "]";
-		return result;
+		return PageUtil.fetchAllPages(EmployeeController.class, model);
 	}
-	@GetMapping("/fetchAll")
+
+	@GetMapping("/fetch")
 	public List<Employee> getAllEmployees(){
 		return employeeRepository.findAll();
 	}		
 	
-	@PostMapping("/create")
+	@PostMapping("/wr")
 	public Employee createEmployee(@RequestBody Employee employee) {
 		return employeeRepository.save(employee);
 	}

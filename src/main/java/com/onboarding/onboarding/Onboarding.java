@@ -32,7 +32,7 @@ public class Onboarding {
 			System.out.println("[ARG] " + arg);
 		}
 
-		springApplication.run();
+		springApplication.run(args);
 
 	}
 }
