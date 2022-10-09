@@ -22,17 +22,23 @@ import java.lang.reflect.InvocationTargetException;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class Onboarding {
+	private static final boolean debugOnThisClass = false;
+
 	public static WebSite webSite = WebSite.create();
 
+
 	public static void main(String[] args){
-		SpringApplication springApplication = new SpringApplication(Onboarding.class);
+		if (! debugOnThisClass){
+			SpringApplication.run(Onboarding.class, args);
+		} else {
+			SpringApplication springApplication = new SpringApplication(Onboarding.class);
 
-		System.out.print("\u001B[48;02;255;255;255m\u001B[38;02;0;0;0m[ARGS!]\u001B[0m\n");
-		for (String arg : args){
-			System.out.println("[ARG] " + arg);
+			System.out.print("\u001B[48;02;255;255;255m\u001B[38;02;0;0;0m[ARGS!]\u001B[0m\n");
+			for (String arg : args){
+				System.out.println("[ARG] " + arg);
+			}
+
+			springApplication.run(args);
 		}
-
-		springApplication.run(args);
-
 	}
 }

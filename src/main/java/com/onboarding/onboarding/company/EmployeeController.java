@@ -43,23 +43,23 @@ public class EmployeeController {
 		return employeeController;
 	}
 
-	@GetMapping("/")
+	@GetMapping(value = "/", headers = "Accept=application/json")
 	public String index(ModelMap model) {
 		EmployeeController employeeController = EmployeeController.create();
 		return PageUtil.fetchAllPages(EmployeeController.class, model);
 	}
 
-	@GetMapping("/fetch")
+	@GetMapping(value = "/fetch", headers = "Accept=application/json")
 	public List<Employee> getAllEmployees(){
 		return employeeRepository.findAll();
 	}		
 	
-	@PostMapping("/wr")
+	@PostMapping(value = "/wr")
 	public Employee createEmployee(@RequestBody Employee employee) {
 		return employeeRepository.save(employee);
 	}
 	
-	@GetMapping("/fetch/{id}")
+	@GetMapping(value = "/fetch/{id}")
 	public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id) {
 		Employee employee = employeeRepository.findById(id).orElseThrow(
 			() -> new ResourceNotFoundException("Employee not exist with id :" + id)
@@ -93,7 +93,7 @@ public class EmployeeController {
 		return ResponseEntity.ok(response);
 	}
 
-	@GetMapping("/error")
+	@GetMapping(value = "/error")
 	public String page__error(ModelMap Model) {
 		String result = "[\"ERROR\"]";
 		return result;

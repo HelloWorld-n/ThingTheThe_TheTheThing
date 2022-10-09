@@ -34,12 +34,12 @@ public class WebSite {
 		return webSite;
 	}
 
-	@GetMapping("/")
+	@GetMapping(value = "/", headers = "Accept=application/json")
 	public String index(ModelMap model) {
 		return PageUtil.fetchAllPages(WebSite.class, model);
 	}
 
-	@GetMapping("/prepare")
+	@GetMapping(value = "/prepare", headers = "Accept=application/json")
 	public String page__prepare(ModelMap Model) {
 		String result = "{";
 
@@ -62,7 +62,7 @@ public class WebSite {
 		return result;
 	}	
 	
-	@GetMapping("/fill/randomThing")
+	@GetMapping(value = "/fill/randomThing", headers = "Accept=application/json")
 	public String page__fill_randomThing(ModelMap Model) {
 		String result = "[";
 		try {
@@ -80,7 +80,7 @@ public class WebSite {
 		return result;
 	}
 
-	@GetMapping("/fetch/randomThing")
+	@GetMapping(value = "/fetch/randomThing", headers = "Accept=application/json")
 	public String page__fetch_randomThing(ModelMap Model) {
 		String result = "[";
 		try {
@@ -105,7 +105,7 @@ public class WebSite {
 		return result;
 	}
 
-	@GetMapping("/check")
+	@GetMapping(value = "/check", headers = "Accept=application/json")
 	public String page__check(ModelMap Model) {
 		String result = "[";
 		try {
@@ -136,7 +136,7 @@ public class WebSite {
 		return result;
 	}
 
-	@GetMapping("/randomBoolean")
+	@GetMapping(value = "/randomBoolean", headers = "Accept=application/json")
 	public String page__randomBoolean(ModelMap Model) {
 		String result = "[";
 		try {
@@ -167,7 +167,7 @@ public class WebSite {
 		return result;
 	}
 
-	@GetMapping("/error")
+	@GetMapping(value = "/error")
 	public String page__error(ModelMap Model) {
 		return "<h1>Error</h1>";
 	}
