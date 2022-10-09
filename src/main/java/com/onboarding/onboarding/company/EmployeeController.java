@@ -25,7 +25,7 @@ import java.sql.SQLException;
 
 @CrossOrigin(origins = "http://[::1]:8080")
 @RestController
-@RequestMapping("/employeeUtil")
+@RequestMapping("/employee")
 public class EmployeeController {
 
 	@Autowired(required = false)
@@ -48,20 +48,21 @@ public class EmployeeController {
 		EmployeeController employeeController = EmployeeController.create();
 		return PageUtil.fetchAllPages(EmployeeController.class, model);
 	}
-
-	@GetMapping(value = "/fetch", headers = "Accept=application/json")
+ 	
+	@GetMapping(value = "/fetch")
 	public List<Employee> getAllEmployees(){
-		return employeeRepository.findAll();
+		System.out.print(this.employeeRepository.findAll());
+		return this.employeeRepository.findAll();
 	}		
 	
-	@PostMapping(value = "/wr")
+	@PostMapping(value = "/create")
 	public Employee createEmployee(@RequestBody Employee employee) {
-		return employeeRepository.save(employee);
+		return this.employeeRepository.save(employee);
 	}
 	
 	@GetMapping(value = "/fetch/{id}")
 	public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id) {
-		Employee employee = employeeRepository.findById(id).orElseThrow(
+		Employee employee = this.employeeRepository.findById(id).orElseThrow(
 			() -> new ResourceNotFoundException("Employee not exist with id :" + id)
 		);
 		return ResponseEntity.ok(employee);
@@ -69,7 +70,7 @@ public class EmployeeController {
 	
 	@PutMapping("/update/{id}")
 	public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody Employee employeeDetails){
-		Employee employee = employeeRepository.findById(id).orElseThrow(
+		Employee employee = this.employeeRepository.findById(id).orElseThrow(
 			() -> new ResourceNotFoundException("Employee not exist with id :" + id)
 		);
 		
@@ -77,17 +78,17 @@ public class EmployeeController {
 		employee.setLastName(employeeDetails.getLastName());
 		employee.setEmailId(employeeDetails.getEmailId());
 		
-		Employee updatedEmployee = employeeRepository.save(employee);
+		Employee updatedEmployee = this.employeeRepository.save(employee);
 		return ResponseEntity.ok(updatedEmployee);
 	}
 	
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<Map<String, Boolean>> deleteEmployee(@PathVariable Long id){
-		Employee employee = employeeRepository.findById(id).orElseThrow(
+		Employee employee = this.employeeRepository.findById(id).orElseThrow(
 			() -> new ResourceNotFoundException("Employee not exist with id :" + id)
 		);
 		
-		employeeRepository.delete(employee);
+		this.employeeRepository.delete(employee);
 		Map<String, Boolean> response = new HashMap<>();
 		response.put("deleted", Boolean.TRUE);
 		return ResponseEntity.ok(response);

@@ -56,13 +56,12 @@ public class WebSite {
 		} catch (SQLException e){
 			result += "\"randomThing\": \"kept\", ";
 		}
-		
 
 		result += "}";
-		return result;
+		return result.replaceAll(",\\s*\\}", "}");
 	}	
 	
-	@GetMapping(value = "/fill/randomThing", headers = "Accept=application/json")
+	@GetMapping(value = "/randomThing/fill", headers = "Accept=application/json")
 	public String page__fill_randomThing(ModelMap Model) {
 		String result = "[";
 		try {
@@ -80,7 +79,7 @@ public class WebSite {
 		return result;
 	}
 
-	@GetMapping(value = "/fetch/randomThing", headers = "Accept=application/json")
+	@GetMapping(value = "/randomThing/fetch", headers = "Accept=application/json")
 	public String page__fetch_randomThing(ModelMap Model) {
 		String result = "[";
 		try {
