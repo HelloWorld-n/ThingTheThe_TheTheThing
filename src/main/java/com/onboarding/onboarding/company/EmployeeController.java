@@ -29,7 +29,7 @@ import java.sql.SQLException;
 public class EmployeeController {
 
 	@Autowired(required = false)
-	private EmployeeRepository employeeRepository;
+	public EmployeeRepository employeeRepository;
 
 	private static EmployeeController employeeController = null;
 
@@ -49,9 +49,8 @@ public class EmployeeController {
 		return PageUtil.fetchAllPages(EmployeeController.class, model);
 	}
  	
-	@GetMapping(value = "/fetch")
-	public List<Employee> getAllEmployees(){
-		System.out.print(this.employeeRepository.findAll());
+	@GetMapping(value = "/find")
+	public List<Employee> findAllEmployees(){
 		return this.employeeRepository.findAll();
 	}		
 	
@@ -60,8 +59,8 @@ public class EmployeeController {
 		return this.employeeRepository.save(employee);
 	}
 	
-	@GetMapping(value = "/fetch/{id}")
-	public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id) {
+	@GetMapping(value = "/find/{id}")
+	public ResponseEntity<Employee> findEmployeeById(@PathVariable Long id) {
 		Employee employee = this.employeeRepository.findById(id).orElseThrow(
 			() -> new ResourceNotFoundException("Employee not exist with id :" + id)
 		);
