@@ -44,7 +44,6 @@ public class WebSite {
 		String result = "{";
 
 		try {
-			SqlConnection.sqlConnect();
 			SqlConnection.execAlteringQuery(
 				"CREATE TABLE randomThing(" + (
 					"id SERIAL PRIMARY KEY" 
@@ -65,7 +64,6 @@ public class WebSite {
 	public String page__fill_randomThing(ModelMap Model) {
 		String result = "[";
 		try {
-			SqlConnection.sqlConnect();
 			SqlConnection.execAlteringQuery(
 				"INSERT INTO randomThing(" + (
 					"value" 
@@ -83,7 +81,6 @@ public class WebSite {
 	public String page__randomThing_find(ModelMap Model) {
 		String result = "[";
 		try {
-			SqlConnection.sqlConnect();
 			ResultSet sqlResult = SqlConnection.execQuery("SELECT * FROM randomThing;");
 			
 			sqlResult.next();
@@ -101,7 +98,7 @@ public class WebSite {
 			}
 		} catch (SQLException e) {
 			System.err.print("\u001B[48;02;255;0;0m\u001B[38;02;0;0;0m[ERROR]\u001B[0m Can't run query!\n");
-			result = "{\"error\": \"can't run query\"}";
+			result += "{\"error\": \"can't run query\"}";
 		}
 		result += "]";
 		return result;
@@ -112,17 +109,16 @@ public class WebSite {
 	public String page__randomThing_find(ModelMap Model, @PathVariable Long id) {
 		String result = "{}";
 		try {
-			SqlConnection.sqlConnect();
 			ResultSet sqlResult = SqlConnection.execQuery(
 				"SELECT * FROM randomThing WHERE id = " + id + ";"
 			);
 			
 			sqlResult.next();
 			result = "{" + (
-					"\"id\": " + Integer.toString(sqlResult.getInt("id"))
-				) + ", " + (
-					"\"value\": " + Integer.toString(sqlResult.getInt("value"))
-				) + "}";
+				"\"id\": " + Integer.toString(sqlResult.getInt("id"))
+			) + ", " + (
+				"\"value\": " + Integer.toString(sqlResult.getInt("value"))
+			) + "}";
 		} catch (SQLException e) {
 			System.err.print("\u001B[48;02;255;0;0m\u001B[38;02;0;0;0m[ERROR]\u001B[0m Can't run query!\n");
 			result = "{\"error\": \"can't run query\"}";
@@ -134,7 +130,6 @@ public class WebSite {
 	public String page__check(ModelMap Model) {
 		String result = "[";
 		try {
-			SqlConnection.sqlConnect();
 			ResultSet sqlResult = SqlConnection.execQuery("SELECT 3 + 5, 3 - 5, 3 * 5, 3 / 5;");
 			
 			sqlResult.next();
@@ -165,7 +160,6 @@ public class WebSite {
 	public String page__randomBoolean(ModelMap Model) {
 		String result = "[";
 		try {
-			SqlConnection.sqlConnect();
 			ResultSet sqlResult = SqlConnection.execQuery("SELECT random() > 0.5, random() > 0.5, random() > 0.5, random() > 0.5;");
 			
 			sqlResult.next();

@@ -27,7 +27,8 @@ public class Onboarding {
 	public static WebSite webSite = WebSite.create();
 
 
-	public static void main(String[] args){
+	public static void main(String[] args){		
+		SqlConnection.sqlConnect();
 		if (! debugOnThisClass){
 			SpringApplication.run(Onboarding.class, args);
 		} else {

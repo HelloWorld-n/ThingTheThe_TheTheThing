@@ -51,7 +51,8 @@ public class EmployeeController {
  	
 	@GetMapping(value = "/find")
 	public List<Employee> findAllEmployees(){
-		return this.employeeRepository.findAll();
+		return EmployeeUtil.findAll();
+		//return this.employeeRepository.findAll();
 	}		
 	
 	@PostMapping(value = "/create")

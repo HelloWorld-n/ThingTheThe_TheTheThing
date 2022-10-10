@@ -15,4 +15,5 @@ Each access to database via SpringApplication results in error code sent to clie
 
 ## Conclusion
 
-Failure。
+Failure。  
+Temporary class `com.onboarding.onboarding.company.EmployeeUtil` is added until problem is fixed。  
