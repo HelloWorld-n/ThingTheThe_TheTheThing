@@ -15,4 +15,4 @@ Each access to database via SpringApplication results in error code sent to clie
 
 ## Conclusion
 
-In progress。
+Failure。

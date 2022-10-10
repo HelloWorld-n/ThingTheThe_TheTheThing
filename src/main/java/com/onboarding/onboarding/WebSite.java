@@ -79,18 +79,20 @@ public class WebSite {
 		return result;
 	}
 
-	@GetMapping(value = "/randomThing/fetch", headers = "Accept=application/json")
-	public String page__fetch_randomThing(ModelMap Model) {
+	@GetMapping(value = "/randomThing/find", headers = "Accept=application/json")
+	public String page__randomThing_find(ModelMap Model) {
 		String result = "[";
 		try {
 			SqlConnection.sqlConnect();
-			ResultSet sqlResult = SqlConnection.execQuery("SELECT value FROM randomThing;");
+			ResultSet sqlResult = SqlConnection.execQuery("SELECT * FROM randomThing;");
 			
 			sqlResult.next();
 			while (true) {
-				result += "[" + (
-					Integer.toString(sqlResult.getInt(1))
-				) + "]";
+				result += "{" + (
+					"\"id\": " + Integer.toString(sqlResult.getInt("id"))
+				) + ", " + (
+					"\"value\": " + Integer.toString(sqlResult.getInt("value"))
+				) + "}";
 				if (sqlResult.next()){
 					result += ", ";
 				} else {
@@ -99,8 +101,32 @@ public class WebSite {
 			}
 		} catch (SQLException e) {
 			System.err.print("\u001B[48;02;255;0;0m\u001B[38;02;0;0;0m[ERROR]\u001B[0m Can't run query!\n");
+			result = "{\"error\": \"can't run query\"}";
 		}
 		result += "]";
+		return result;
+	}
+
+
+	@GetMapping(value = "/randomThing/find/{id}", headers = "Accept=application/json")
+	public String page__randomThing_find(ModelMap Model, @PathVariable Long id) {
+		String result = "{}";
+		try {
+			SqlConnection.sqlConnect();
+			ResultSet sqlResult = SqlConnection.execQuery(
+				"SELECT * FROM randomThing WHERE id = " + id + ";"
+			);
+			
+			sqlResult.next();
+			result = "{" + (
+					"\"id\": " + Integer.toString(sqlResult.getInt("id"))
+				) + ", " + (
+					"\"value\": " + Integer.toString(sqlResult.getInt("value"))
+				) + "}";
+		} catch (SQLException e) {
+			System.err.print("\u001B[48;02;255;0;0m\u001B[38;02;0;0;0m[ERROR]\u001B[0m Can't run query!\n");
+			result = "{\"error\": \"can't run query\"}";
+		}
 		return result;
 	}
 
