@@ -52,7 +52,9 @@ public class EmployeeController {
 	@GetMapping(value = "/find")
 	public List<Employee> findAllEmployees(){
 		return EmployeeUtil.findAll();
-		//return this.employeeRepository.findAll();
+		/*
+		return this.employeeRepository.findAll();
+		*/
 	}		
 	
 	@PostMapping(value = "/create")
@@ -62,10 +64,14 @@ public class EmployeeController {
 	
 	@GetMapping(value = "/find/{id}")
 	public ResponseEntity<Employee> findEmployeeById(@PathVariable Long id) {
+		Employee employee = EmployeeUtil.findById(id);
+		return ResponseEntity.ok(employee);
+		/*
 		Employee employee = this.employeeRepository.findById(id).orElseThrow(
 			() -> new ResourceNotFoundException("Employee not exist with id :" + id)
 		);
 		return ResponseEntity.ok(employee);
+		*/
 	}
 	
 	@PutMapping("/update/{id}")

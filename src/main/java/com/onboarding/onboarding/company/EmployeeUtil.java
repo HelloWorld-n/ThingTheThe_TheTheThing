@@ -33,4 +33,25 @@ public class EmployeeUtil {
 		return result;
 	}
 
+	public static Employee findById(long id){
+		Employee result = null;
+		try {
+			ResultSet sqlResult = SqlConnection.execQuery("SELECT * FROM \"employee\" WHERE id = " + id + ";");
+			
+			while (sqlResult.next()) {
+				Employee employee = (
+					new Employee(
+						sqlResult.getString("first_name"),
+						sqlResult.getString("last_name"),
+						sqlResult.getString("email_id")
+					)
+				);
+				employee.setId(sqlResult.getLong("id"));
+				result = employee;
+			}
+		} catch (SQLException e) {
+		}
+		return result;
+	}
+
 }
