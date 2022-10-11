@@ -45,7 +45,7 @@ public class WebSite {
 
 		try {
 			SqlConnection.execAlteringQuery(
-				"CREATE TABLE randomThing(" + (
+				"CREATE TABLE \"randomThing\" (" + (
 					"id SERIAL PRIMARY KEY" 
 				) + ", " + (
 					"value int NOT NULL"
@@ -54,6 +54,23 @@ public class WebSite {
 			result += "\"randomThing\": \"added\", ";
 		} catch (SQLException e){
 			result += "\"randomThing\": \"kept\", ";
+		}
+
+		try {
+			SqlConnection.execAlteringQuery(
+				"CREATE TABLE \"employee\" (" + (
+					"id SERIAL PRIMARY KEY" 
+				) + ", " + (
+					"first_name varchar NOT NULL"
+				) + ", " + (
+					"last_name varchar NOT NULL"
+				) + ", " + (
+					"email_id varchar NOT NULL"
+				) + ");"
+			);
+			result += "\"employee\": \"added\", ";
+		} catch (SQLException e){
+			result += "\"employee\": \"kept\", ";
 		}
 
 		result += "}";
