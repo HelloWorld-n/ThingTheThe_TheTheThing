@@ -20,7 +20,7 @@ interface DbContract {
 public class SqlConnection {
 	private static Connection sqlConnection = null;
 
-	public static void sqlConnect(){
+	public static Connection sqlConnect(){
 		try {
             Class.forName("org.postgresql.Driver");
 			if (sqlConnection == null){
@@ -34,7 +34,7 @@ public class SqlConnection {
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
-		
+		return sqlConnection;
 	}
 
 	public static ResultSet execQuery(String query) throws SQLException {

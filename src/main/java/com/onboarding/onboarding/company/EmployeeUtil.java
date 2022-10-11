@@ -1,5 +1,6 @@
 package com.onboarding.onboarding.company;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ public class EmployeeUtil {
 	public static List<Employee> findAll(){
 		List<Employee> result = new ArrayList<Employee>();
 		try {
-			ResultSet sqlResult = SqlConnection.execQuery("SELECT * FROM \"employee\";");
+			ResultSet sqlResult = SqlConnection.execQuery("SELECT * FROM \"employee\" ORDER BY id;");
 			
 			while (sqlResult.next()) {
 				Employee employee = (
@@ -53,5 +54,20 @@ public class EmployeeUtil {
 		}
 		return result;
 	}
-
+	
+	public static Employee save(Employee employee){
+		Employee result = null;
+		try {
+			PreparedStatement stm = SqlConnection.sqlConnect().prepareStatement(
+				"INSERT INTO \"employee\"(first_name, last_name, email_id) VALUES (?, ?, ?);"
+			);
+			stm.setString(1, employee.getFirstName());
+			stm.setString(2, employee.getLastName());
+			stm.setString(3, employee.getEmailId());
+			stm.executeUpdate();
+			
+		} catch (SQLException e) {
+		}
+		return result;
+	}
 }

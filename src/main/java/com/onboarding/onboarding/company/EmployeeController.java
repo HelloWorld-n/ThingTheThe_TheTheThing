@@ -1,6 +1,7 @@
 package com.onboarding.onboarding.company;
 
 import java.lang.reflect.Method;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,8 +60,38 @@ public class EmployeeController {
 	
 	@PostMapping(value = "/create")
 	public Employee createEmployee(@RequestBody Employee employee) {
+		return EmployeeUtil.save(employee);
+		/*
 		return this.employeeRepository.save(employee);
+		*/
 	}
+	
+	@PostMapping(value = "/create'")
+	public Employee createEmployee(@RequestBody String employeeInfo) {
+		String firstName = "";
+		String lastName = "";
+		String emailId = "";
+		for (String thing : employeeInfo.split("&")){
+			switch(thing.split("=")[0]){
+				case "first_name":
+					firstName = URLDecoder.decode(thing.split("=")[1]);
+				break;
+				case "last_name":
+					lastName = URLDecoder.decode(thing.split("=")[1]);
+				break;
+				case "email_id":
+					emailId = URLDecoder.decode(thing.split("=")[1]);
+				break;
+			}
+		}
+		
+		return EmployeeUtil.save(new Employee(firstName, lastName, emailId));
+		/*
+		return this.employeeRepository.save(employee);
+		*/
+	}
+
+	
 	
 	@GetMapping(value = "/find/{id}")
 	public ResponseEntity<Employee> findEmployeeById(@PathVariable Long id) {
