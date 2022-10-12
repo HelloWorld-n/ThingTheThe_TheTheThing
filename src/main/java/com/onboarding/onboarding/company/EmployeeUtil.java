@@ -56,7 +56,6 @@ public class EmployeeUtil {
 	}
 	
 	public static Employee save(Employee employee){
-		Employee result = null;
 		try {
 			PreparedStatement stm = SqlConnection.sqlConnect().prepareStatement(
 				"INSERT INTO \"employee\"(first_name, last_name, email_id) VALUES (?, ?, ?);"
@@ -68,6 +67,6 @@ public class EmployeeUtil {
 			
 		} catch (SQLException e) {
 		}
-		return result;
+		return employee;
 	}
 }
