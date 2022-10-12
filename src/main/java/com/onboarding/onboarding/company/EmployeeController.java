@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.SQLException;
+import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.ComponentScan;
 
 @CrossOrigin(origins = "http://[::1]:8080")
 @RestController
