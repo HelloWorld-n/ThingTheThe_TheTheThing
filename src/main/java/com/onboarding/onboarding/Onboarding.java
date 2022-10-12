@@ -37,5 +37,6 @@ public class Onboarding {
 			}
 		}
 		ApplicationContext applicationContext = springApplication.run(args);
+		applicationContext.getBean("employeeRepository", com.onboarding.onboarding.company.EmployeeRepository.class);
 	}
 }

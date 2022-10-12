@@ -10,6 +10,7 @@ import com.onboarding.onboarding.SqlConnection;
 import com.onboarding.onboarding.PageUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,12 +27,15 @@ import java.sql.SQLException;
 import org.springframework.stereotype.Component;
 import org.springframework.context.annotation.ComponentScan;
 
+@Component
+@ComponentScan("com.onboarding.onboaring.company")
 @CrossOrigin(origins = "http://[::1]:8080")
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
 
 	@Autowired(required = false)
+	@Qualifier("employeeRepository")
 	public EmployeeRepository employeeRepository;
 
 	private static EmployeeController employeeController = null;

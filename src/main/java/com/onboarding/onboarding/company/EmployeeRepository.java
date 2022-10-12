@@ -9,6 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @Repository
 @Service
+@Component
 public interface EmployeeRepository extends JpaRepository<Employee, Long>{
 
 }
