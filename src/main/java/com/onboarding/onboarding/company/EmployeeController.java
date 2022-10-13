@@ -34,43 +34,44 @@ import org.springframework.context.annotation.ComponentScan;
 @RequestMapping("/employee")
 public class EmployeeController {
 
-	@Autowired(required = false)
-	@Qualifier("employeeRepository")
-	public EmployeeRepository employeeRepository;
+	private EmployeeRepository employeeRepository;
 
 	private static EmployeeController employeeController = null;
 
-	private EmployeeController(){
+	@Autowired
+	public EmployeeController(){
+
 	}
 
-	public static EmployeeController create(){
-		if (employeeController == null){
-			employeeController = new EmployeeController();
-		}
-		return employeeController;
+	public EmployeeController(EmployeeRepository employeeRepository){
+		this.employeeRepository = employeeRepository;
 	}
+
 
 	@GetMapping(value = "/", headers = "Accept=application/json")
 	public String index(ModelMap model) {
-		EmployeeController employeeController = EmployeeController.create();
 		return PageUtil.fetchAllPages(EmployeeController.class, model);
 	}
  	
 	@GetMapping(value = "/find")
 	public List<Employee> findAllEmployees(){
 		return EmployeeUtil.findAll();
-		/*
-		return this.employeeRepository.findAll();
-		*/
 	}		
+
+	@GetMapping(value = "/find'")
+	public List<Employee> findAllEmployees_viaSpringboot(){
+		return this.employeeRepository.findAll();
+	}
 	
 	@PostMapping(value = "/create")
 	public Employee createEmployee(@RequestBody Employee employee) {
-		return EmployeeUtil.save(employee);
 		/*
-		return this.employeeRepository.save(employee);
+		return EmployeeUtil.save(employee);
 		*/
+		System.out.print(this.employeeRepository);
+		return this.employeeRepository.save(employee);
 	}
+	
 	
 	@PostMapping(value = "/create'")
 	public Employee createEmployee(@RequestBody String employeeInfo) {
@@ -92,11 +93,8 @@ public class EmployeeController {
 		}
 		
 		return EmployeeUtil.save(new Employee(firstName, lastName, emailId));
-		/*
-		return this.employeeRepository.save(employee);
-		*/
 	}
-
+	
 	
 	
 	@GetMapping(value = "/find/{id}")

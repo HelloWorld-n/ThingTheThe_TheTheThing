@@ -14,6 +14,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.ApplicationContext;
 
 import java.io.IOException;
@@ -21,11 +22,9 @@ import java.lang.IllegalAccessException;
 import java.lang.reflect.InvocationTargetException;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+//@ImportResource("classpath:beans-context.xml")
 public class Onboarding {
 	private static final boolean debugOnThisClass = false;
-
-	public static WebSite webSite = WebSite.create();
-
 
 	public static void main(String[] args){
 		SpringApplication springApplication = new SpringApplication(Onboarding.class);
@@ -37,6 +36,5 @@ public class Onboarding {
 			}
 		}
 		ApplicationContext applicationContext = springApplication.run(args);
-		applicationContext.getBean("employeeRepository", com.onboarding.onboarding.company.EmployeeRepository.class);
 	}
 }

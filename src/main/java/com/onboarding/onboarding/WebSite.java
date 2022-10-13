@@ -2,6 +2,7 @@ package com.onboarding.onboarding;
 
 import java.sql.ResultSet;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,17 +23,11 @@ import java.sql.SQLException;
 @RequestMapping("/")
 public class WebSite {
 
-	private static WebSite webSite = null;
 
-	private WebSite(){
+	@Autowired
+	public WebSite(){
 	}
 
-	public static WebSite create(){
-		if (webSite == null){
-			webSite = new WebSite();
-		}
-		return webSite;
-	}
 
 	@GetMapping(value = "/", headers = "Accept=application/json")
 	public String index(ModelMap model) {
