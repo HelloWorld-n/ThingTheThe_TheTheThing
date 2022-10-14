@@ -69,6 +69,12 @@ public class EmployeeController {
 		return this.employeeRepository.findAll();
 	}
 	
+	@GetMapping(value = "/find/{id}")
+	public ResponseEntity<Employee> findEmployeeById(@PathVariable Long id) {
+		Employee employee = EmployeeUtil.findById(id);
+		return ResponseEntity.ok(employee);
+	}
+	
 	@PostMapping(value = "/create")
 	public Employee createEmployee(@RequestBody Employee employee) {
 		/*
@@ -103,20 +109,13 @@ public class EmployeeController {
 	
 	
 	
-	@GetMapping(value = "/find/{id}")
-	public ResponseEntity<Employee> findEmployeeById(@PathVariable Long id) {
-		Employee employee = EmployeeUtil.findById(id);
-		return ResponseEntity.ok(employee);
-		/*
-		Employee employee = this.employeeRepository.findById(id).orElseThrow(
-			() -> new ResourceNotFoundException("Employee not exist with id :" + id)
-		);
-		return ResponseEntity.ok(employee);
-		*/
-	}
+	
 	
 	@PutMapping("/update/{id}")
-	public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody Employee employeeDetails){
+	public ResponseEntity<Employee> updateEmployee(
+		@PathVariable Long id,
+		@RequestBody Employee employeeDetails
+	){
 		Employee employee = this.employeeRepository.findById(id).orElseThrow(
 			() -> new ResourceNotFoundException("Employee not exist with id :" + id)
 		);
@@ -128,14 +127,45 @@ public class EmployeeController {
 		Employee updatedEmployee = this.employeeRepository.save(employee);
 		return ResponseEntity.ok(updatedEmployee);
 	}
-	
-	@DeleteMapping("/delete/{id}")
+
+	@PostMapping("/update'")
+	public ResponseEntity<Employee> updateEmployee(@RequestBody String employeeInfo){
+		Long id = new Long(0);
+		String firstName = "";
+		String lastName = "";
+		String emailId = "";
+		for (String thing : employeeInfo.split("&")){
+			switch(thing.split("=")[0]){
+				case "id":
+					id = new Long(URLDecoder.decode(thing.split("=")[1]));
+				break;
+				case "first_name":
+					firstName = URLDecoder.decode(thing.split("=")[1]);
+				break;
+				case "last_name":
+					lastName = URLDecoder.decode(thing.split("=")[1]);
+				break;
+				case "email_id":
+					emailId = URLDecoder.decode(thing.split("=")[1]);
+				break;
+			}
+		}
+		Employee employee = EmployeeUtil.findById(id);
+		if (! firstName.equals("")){
+			employee.setFirstName(firstName);
+		}
+		if (! lastName.equals("")){
+			employee.setLastName(lastName);
+		}
+		if (! emailId.equals("")){
+			employee.setEmailId(emailId);
+		}
+		return ResponseEntity.ok(EmployeeUtil.update(employee));
+	}
+
+	@GetMapping("/delete/{id}")
 	public ResponseEntity<Map<String, Boolean>> deleteEmployee(@PathVariable Long id){
-		Employee employee = this.employeeRepository.findById(id).orElseThrow(
-			() -> new ResourceNotFoundException("Employee not exist with id :" + id)
-		);
-		
-		this.employeeRepository.delete(employee);
+		EmployeeUtil.delete(id);
 		Map<String, Boolean> response = new HashMap<>();
 		response.put("deleted", Boolean.TRUE);
 		return ResponseEntity.ok(response);

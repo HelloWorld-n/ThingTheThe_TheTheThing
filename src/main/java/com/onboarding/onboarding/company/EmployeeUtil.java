@@ -69,4 +69,48 @@ public class EmployeeUtil {
 		}
 		return employee;
 	}
+
+	public static Employee update(Employee employee){
+		try {
+			PreparedStatement stm = SqlConnection.sqlConnect().prepareStatement(
+				(
+					"UPDATE \"employee\""
+				) + " " + (
+					"SET " + " " + (
+						"first_name = ?,"
+					 ) + " " + (
+						"last_name = ?,"
+					 ) + " " + (
+						"email_id = ?"
+					 )
+				) + " " + (
+					"WHERE id = ?;"
+				)
+			);
+			stm.setString(1, employee.getFirstName());
+			stm.setString(2, employee.getLastName());
+			stm.setString(3, employee.getEmailId());
+			stm.setLong(4, employee.getId());
+			stm.executeUpdate();
+			
+		} catch (SQLException e) {
+		}
+		return employee;
+	}
+	
+	public static void delete(Long id){
+		try {
+			PreparedStatement stm = SqlConnection.sqlConnect().prepareStatement(
+				(
+					"DELETE FROM \"employee\""
+				) + " " + (
+					"WHERE id = ?;"
+				)
+			);
+			stm.setLong(1, id);
+			stm.executeUpdate();
+			
+		} catch (SQLException e) {
+		}
+	}
 }
