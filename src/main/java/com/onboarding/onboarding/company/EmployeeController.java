@@ -2,6 +2,7 @@ package com.onboarding.onboarding.company;
 
 import com.onboarding.onboarding.SqlConnection;
 import com.onboarding.onboarding.PageUtil;
+import com.onboarding.onboarding.annotation.IgnoreMapping;
 
 import java.lang.reflect.Method;
 import java.net.URLDecoder;
@@ -64,6 +65,7 @@ public class EmployeeController {
 		return EmployeeUtil.findAll();
 	}		
 
+	@IgnoreMapping
 	@GetMapping(value = "/find'")
 	public List<Employee> findAllEmployees_viaSpringboot(){
 		return this.employeeRepository.findAll();
@@ -107,10 +109,7 @@ public class EmployeeController {
 		return EmployeeUtil.save(new Employee(firstName, lastName, emailId));
 	}
 	
-	
-	
-	
-	
+	@IgnoreMapping
 	@PutMapping("/update/{id}")
 	public ResponseEntity<Employee> updateEmployee(
 		@PathVariable Long id,
@@ -163,12 +162,18 @@ public class EmployeeController {
 		return ResponseEntity.ok(EmployeeUtil.update(employee));
 	}
 
-	@GetMapping("/delete/{id}")
+	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<Map<String, Boolean>> deleteEmployee(@PathVariable Long id){
 		EmployeeUtil.delete(id);
 		Map<String, Boolean> response = new HashMap<>();
 		response.put("deleted", Boolean.TRUE);
 		return ResponseEntity.ok(response);
+	}
+
+	@IgnoreMapping
+	@GetMapping("/delete/{id}")
+	public ResponseEntity<Map<String, Boolean>> deleteEmployee_browserCompatible(@PathVariable Long id){
+		return this.deleteEmployee(id);
 	}
 
 	@GetMapping(value = "/error")

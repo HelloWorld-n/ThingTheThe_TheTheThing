@@ -1,5 +1,7 @@
 package com.onboarding.onboarding;
 
+import com.onboarding.onboarding.annotation.IgnoreMapping;
+
 import java.lang.reflect.Method;
 
 import org.springframework.ui.ModelMap;
@@ -12,23 +14,25 @@ public class PageUtil {
 	public static String fetchAllPages(Class class_, ModelMap model){
 		String result = "{";
 		for (Method method : class_.getDeclaredMethods()) {
-			if (method.isAnnotationPresent(GetMapping.class)) {
-				GetMapping Mapping = method.getAnnotation(GetMapping.class);
-				String addressString = Mapping.value()[0];
-				result += "\"" + addressString + "\": \"get\", ";
-			} else if (method.isAnnotationPresent(PostMapping.class)) {
-				PostMapping Mapping = method.getAnnotation(PostMapping.class);
-				String addressString = Mapping.value()[0];
-				result += "\"" + addressString + "\": \"post\", ";
-			} else if (method.isAnnotationPresent(PutMapping.class)) {
-				PutMapping Mapping = method.getAnnotation(PutMapping.class);
-				String addressString = Mapping.value()[0];
-				result += "\"" + addressString + "\": \"put\", ";
-			} else if (method.isAnnotationPresent(DeleteMapping.class)) {
-				DeleteMapping Mapping = method.getAnnotation(DeleteMapping.class);
-				String addressString = Mapping.value()[0];
-				result += "\"" + addressString + "\": \"delete\", ";
-			} else {
+			if (! method.isAnnotationPresent(IgnoreMapping.class)){
+				if (method.isAnnotationPresent(GetMapping.class)) {
+					GetMapping Mapping = method.getAnnotation(GetMapping.class);
+					String addressString = Mapping.value()[0];
+					result += "\"" + addressString + "\": \"get\", ";
+				} else if (method.isAnnotationPresent(PostMapping.class)) {
+					PostMapping Mapping = method.getAnnotation(PostMapping.class);
+					String addressString = Mapping.value()[0];
+					result += "\"" + addressString + "\": \"post\", ";
+				} else if (method.isAnnotationPresent(PutMapping.class)) {
+					PutMapping Mapping = method.getAnnotation(PutMapping.class);
+					String addressString = Mapping.value()[0];
+					result += "\"" + addressString + "\": \"put\", ";
+				} else if (method.isAnnotationPresent(DeleteMapping.class)) {
+					DeleteMapping Mapping = method.getAnnotation(DeleteMapping.class);
+					String addressString = Mapping.value()[0];
+					result += "\"" + addressString + "\": \"delete\", ";
+				} else {
+				}
 			}
 		} 
 		result += "\"" + class_.getName() + "\": \"teapot#418\"}";
