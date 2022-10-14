@@ -5,6 +5,7 @@ import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.validation.Valid; 
 
 import com.onboarding.onboarding.SqlConnection;
 import com.onboarding.onboarding.PageUtil;
@@ -38,15 +39,20 @@ public class EmployeeController {
 
 	private static EmployeeController employeeController = null;
 
-	@Autowired
-	public EmployeeController(){
-
+	private EmployeeController(){
 	}
 
-	public EmployeeController(EmployeeRepository employeeRepository){
+	private EmployeeController(EmployeeRepository employeeRepository){
 		this.employeeRepository = employeeRepository;
 	}
 
+	@Autowired
+	public static EmployeeController create(){
+		if (employeeController == null) {
+			employeeController = new EmployeeController();
+		}
+		return employeeController;
+	}
 
 	@GetMapping(value = "/", headers = "Accept=application/json")
 	public String index(ModelMap model) {

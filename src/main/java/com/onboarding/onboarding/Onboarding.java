@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.lang.IllegalAccessException;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.InetAddress;
 import java.net.ServerSocket;
@@ -13,16 +15,11 @@ import java.net.Socket;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.ApplicationContext;
 
 import java.io.IOException;
-import java.lang.IllegalAccessException;
-import java.lang.reflect.InvocationTargetException;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
-//@ImportResource("classpath:beans-context.xml")
 public class Onboarding {
 	private static final boolean debugOnThisClass = false;
 

@@ -1,6 +1,8 @@
 package com.onboarding.onboarding;
 
+import java.lang.reflect.InvocationTargetException;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.lang.reflect.InvocationTargetException;
-import java.sql.SQLException;
 
 @CrossOrigin(origins = "http://[::1]:8080")
 @RestController
@@ -24,10 +24,18 @@ import java.sql.SQLException;
 public class WebSite {
 
 
-	@Autowired
-	public WebSite(){
+	private static WebSite webSite = null;
+
+	private WebSite(){
 	}
 
+	@Autowired
+	public static WebSite create(){
+		if (webSite == null){
+			webSite = new WebSite();
+		}
+		return webSite;
+	}
 
 	@GetMapping(value = "/", headers = "Accept=application/json")
 	public String index(ModelMap model) {
