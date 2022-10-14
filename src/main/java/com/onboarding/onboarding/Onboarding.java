@@ -3,6 +3,7 @@ package com.onboarding.onboarding;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.lang.IllegalAccessException;
@@ -17,7 +18,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 
-import java.io.IOException;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class Onboarding {

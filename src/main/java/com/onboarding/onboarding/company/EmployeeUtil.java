@@ -1,12 +1,12 @@
 package com.onboarding.onboarding.company;
 
+import com.onboarding.onboarding.SqlConnection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.onboarding.onboarding.SqlConnection;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
