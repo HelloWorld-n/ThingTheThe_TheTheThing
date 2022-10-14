@@ -1,15 +1,15 @@
 package com.onboarding.onboarding.company;
 
+import com.onboarding.onboarding.SqlConnection;
+import com.onboarding.onboarding.PageUtil;
+
 import java.lang.reflect.Method;
 import java.net.URLDecoder;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.validation.Valid; 
-
-import com.onboarding.onboarding.SqlConnection;
-import com.onboarding.onboarding.PageUtil;
-import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
