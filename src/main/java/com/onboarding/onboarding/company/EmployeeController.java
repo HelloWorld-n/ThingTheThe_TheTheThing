@@ -134,19 +134,22 @@ public class EmployeeController {
 		String lastName = "";
 		String emailId = "";
 		for (String thing : employeeInfo.split("&")){
-			switch(thing.split("=")[0]){
-				case "id":
-					id = new Long(URLDecoder.decode(thing.split("=")[1]));
-				break;
-				case "first_name":
-					firstName = URLDecoder.decode(thing.split("=")[1]);
-				break;
-				case "last_name":
-					lastName = URLDecoder.decode(thing.split("=")[1]);
-				break;
-				case "email_id":
-					emailId = URLDecoder.decode(thing.split("=")[1]);
-				break;
+			try{
+				switch(thing.split("=")[0]){
+					case "id":
+						id = new Long(URLDecoder.decode(thing.split("=")[1]));
+					break;
+					case "first_name":
+						firstName = URLDecoder.decode(thing.split("=")[1]);
+					break;
+					case "last_name":
+						lastName = URLDecoder.decode(thing.split("=")[1]);
+					break;
+					case "email_id":
+						emailId = URLDecoder.decode(thing.split("=")[1]);
+					break;
+				}
+			} catch(java.lang.ArrayIndexOutOfBoundsException e) {
 			}
 		}
 		Employee employee = EmployeeUtil.findById(id);
