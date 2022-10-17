@@ -2,6 +2,7 @@ package com.onboarding.onboarding.company;
 
 import com.onboarding.onboarding.SqlConnection;
 import com.onboarding.onboarding.PageUtil;
+import com.onboarding.onboarding.annotation.DotMapping;
 import com.onboarding.onboarding.annotation.IgnoreMapping;
 
 import java.lang.reflect.Method;
@@ -86,7 +87,7 @@ public class EmployeeController {
 		return this.employeeRepository.save(employee);
 	}
 	
-	
+	@DotMapping(extension = "html")
 	@PostMapping(value = "/create'")
 	public Employee createEmployee(@RequestBody String employeeInfo) {
 		String firstName = "";
@@ -127,6 +128,7 @@ public class EmployeeController {
 		return ResponseEntity.ok(updatedEmployee);
 	}
 
+	@DotMapping(extension = "html")
 	@PostMapping("/update'")
 	public ResponseEntity<Employee> updateEmployee(@RequestBody String employeeInfo){
 		Long id = new Long(0);
