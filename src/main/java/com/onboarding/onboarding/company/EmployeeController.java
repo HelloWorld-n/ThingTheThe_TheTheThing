@@ -55,7 +55,7 @@ public class EmployeeController {
 		return employeeController;
 	}
 
-	@GetMapping(value = "/", headers = "Accept=application/json")
+	@GetMapping(value = "", headers = "Accept=application/json")
 	public String index(ModelMap model) {
 		return PageUtil.fetchAllPages(EmployeeController.class, model);
 	}

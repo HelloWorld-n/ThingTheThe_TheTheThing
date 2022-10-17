@@ -37,7 +37,7 @@ public class WebSite {
 		return webSite;
 	}
 
-	@GetMapping(value = "/", headers = "Accept=application/json")
+	@GetMapping(value = "", headers = "Accept=application/json")
 	public String index(ModelMap model) {
 		return PageUtil.fetchAllPages(WebSite.class, model);
 	}
