@@ -3,7 +3,7 @@ spring.datasource.name = postgres
 spring.datasource.username = user
 spring.datasource.database = postgres
 spring.jpa.show-sql = true
-spring.datasource.driver-class-name = com.mysql.jdbc.Driver
+spring.datasource.driver-class-name = org.postgresql.driver
 spring.jpa.database = postgresql
 
 ## Hibernate Properties
@@ -11,4 +11,4 @@ spring.jpa.database = postgresql
 spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.PostgreSQLDialect
 
 # Hibernate ddl auto (create, create-drop, validate, update)
-spring.jpa.hibernate.ddl-auto = update
+spring.jpa.hibernate.ddl-auto = none
