@@ -3,12 +3,12 @@
 
 <body>
 
-	<form action="update'" method="post">
+	<form action="update'" method="post" accept-charset="utf-8">
 		<table>
 			<tbody>
 				<tr>
 					<td>Id</td>
-					<td><input id="id" name="id" type="number" /></td>
+					<td><input id="id" name="id" type="number" onchange="apply()" /></td>
 				</tr>
 				<br />
 				<tr>
@@ -29,7 +29,28 @@
 			</tbody>
 		</table>
 	</form>
-
+	<script>
+		function apply() {
+			let id = document.querySelector("[action=\"update'\"] #id").value;
+			fetch("./find/" + id).then((response) => {
+				try {
+					return response.json();
+				} catch (SyntaxError) {
+					return { "error": `Employee(id = ${id}) doesn't exist!` }
+				}
+			}).then(data => {
+				const { firstName, lastName, emailId } = data;
+				console.log(data);
+				if ("error" in data) {
+					alert(data["error"]);
+				} else {
+					document.querySelector("[action=\"update'\"] #first_name").value = firstName;
+					document.querySelector("[action=\"update'\"] #last_name").value = lastName;
+					document.querySelector("[action=\"update'\"] #email_id").value = emailId;
+				}
+			})
+		}
+	</script>
 </body>
 
 </html>
