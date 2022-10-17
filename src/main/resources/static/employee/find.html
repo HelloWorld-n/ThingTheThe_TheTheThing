@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="/css/main.css">
+	<script src="/js/main.js"></script>
+</head>
+
+<body onload="main()">
+	<div id="hehehe">
+		<table>
+			<thead><tr>
+				<td>id</td>
+				<td>first_name</td>
+				<td>last_name</td>
+				<td>email_id</td>
+			</tr></thead>
+			<tbody id="result"></tbody>
+		</table>
+	</div>
+	<script src="/js/EscapeThing.js"></script>
+	<script>
+		function main() {
+			fetch("./find").then((response) => {
+				try {
+					return response.json();
+				} catch (SyntaxError) {
+					return { "error": `Employee(id = ${id}) doesn't exist!` }
+				}
+			}).then(data => {
+				for (let employee of data) {
+					const { id, firstName, lastName, emailId } = employee;
+					document.querySelector("#hehehe #result").innerHTML += (
+						"<tr>" + (
+							"<td>" + EscapeThing.htmlEscape(id) + "</td>"
+						) + (
+							"<td>" + EscapeThing.htmlEscape(firstName) + "</td>"
+						) + (
+							"<td>" + EscapeThing.htmlEscape(lastName) + "</td>"
+						) + (
+							"<td>" + EscapeThing.htmlEscape(emailId) + "</td>"
+						) + "</tr>"
+					);
+				}
+			})
+		}
+	</script>
+</body>
+
+</html>
