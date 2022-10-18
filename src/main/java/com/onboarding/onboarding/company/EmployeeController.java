@@ -66,7 +66,7 @@ public class EmployeeController {
 		return EmployeeUtil.findAll();
 	}		
 
-	@IgnoreMapping
+	@DotMapping(extension = "html")
 	@GetMapping(value = "/find'")
 	public List<Employee> findAllEmployees_viaSpringboot(){
 		return this.employeeRepository.findAll();
