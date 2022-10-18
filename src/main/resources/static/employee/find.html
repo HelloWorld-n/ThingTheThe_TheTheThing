@@ -8,13 +8,20 @@
 
 <body onload="main()">
 	<div id="hehehe">
+		<div id="selection">
+			first_name <input id="first_name" type="text" onchange="apply()" /><br />
+			last_name <input id="last_name" type="text" onchange="apply()" /><br />
+			email_id <input id="email_id" type="text" onchange="apply()" /><br />
+		</div>
 		<table>
-			<thead><tr>
-				<td>id</td>
-				<td>first_name</td>
-				<td>last_name</td>
-				<td>email_id</td>
-			</tr></thead>
+			<thead>
+				<tr>
+					<td>id</td>
+					<td>first_name</td>
+					<td>last_name</td>
+					<td>email_id</td>
+				</tr>
+			</thead>
 			<tbody id="result"></tbody>
 		</table>
 	</div>
@@ -29,9 +36,14 @@
 				}
 			}).then(data => {
 				for (let employee of data) {
+					for (let key in employee) {
+						if (typeof employee[key] == "string") {
+							employee[key] = employee[key].replaceAll(/"/g, "");
+						}
+					}
 					const { id, firstName, lastName, emailId } = employee;
 					document.querySelector("#hehehe #result").innerHTML += (
-						"<tr>" + (
+						`<tr id=${id} first_name="${firstName}" last_name="${lastName}" email_id="${emailId}">` + (
 							"<td>" + EscapeThing.htmlEscape(id) + "</td>"
 						) + (
 							"<td>" + EscapeThing.htmlEscape(firstName) + "</td>"
@@ -43,6 +55,40 @@
 					);
 				}
 			})
+		}
+
+		function apply() {
+			let text = (() => {
+				let selection = document.querySelector("#hehehe #selection");
+				let firstName = selection.querySelector("#first_name").value;
+				let lastName = selection.querySelector("#last_name").value;
+				let emailId = selection.querySelector("#email_id").value;
+				return {
+					"first_name": firstName,
+					"last_name": lastName,
+					"email_id": emailId,
+				}
+			})();
+
+			let regExpEs = {};
+			for (let item in text) {
+				try {
+					regExpEs[item] = new RegExp(text[item]);
+				} catch (error) {
+					alert(error);
+					regExpEs[item] = /.*/;
+				}
+			}
+
+			for (let item of document.querySelectorAll("#hehehe #result tr")) {
+				item.style.display = null;
+				for (let attribute of ["first_name", "last_name", "email_id"]) {
+					console.log(attribute, item.getAttribute(attribute).match(regExpEs[attribute]))
+					if (item.getAttribute(attribute).match(regExpEs[attribute]) === null) {
+						item.style.display = "none";
+					}
+				}
+			}
 		}
 	</script>
 </body>

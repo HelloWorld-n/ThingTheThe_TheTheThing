@@ -40,7 +40,7 @@
 			fetch("./find/" + id).then((response) => {
 				try {
 					return response.json();
-				} catch (SyntaxError) {
+				} catch (error) {
 					return { "error": `Employee(id = ${id}) doesn't exist!` }
 				}
 			}).then(data => {
