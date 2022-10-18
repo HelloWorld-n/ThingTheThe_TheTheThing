@@ -78,13 +78,10 @@ public class EmployeeController {
 		return ResponseEntity.ok(employee);
 	}
 	
+	@IgnoreMapping
 	@PostMapping(value = "/create")
 	public Employee createEmployee(@RequestBody Employee employee) {
-		/*
 		return EmployeeUtil.save(employee);
-		*/
-		System.out.print(this.employeeRepository);
-		return this.employeeRepository.save(employee);
 	}
 	
 	@DotMapping(extension = "html")
