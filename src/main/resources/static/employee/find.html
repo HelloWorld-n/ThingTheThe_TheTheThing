@@ -20,6 +20,7 @@
 					<td>first_name</td>
 					<td>last_name</td>
 					<td>email_id</td>
+					<td><i>hehehe</i></td>
 				</tr>
 			</thead>
 			<tbody id="result"></tbody>
@@ -51,6 +52,8 @@
 							"<td>" + EscapeThing.htmlEscape(lastName) + "</td>"
 						) + (
 							"<td>" + EscapeThing.htmlEscape(emailId) + "</td>"
+						) + (
+							`<td formthing><button onclick="gotoUpdate(${id})">update</button></td>`
 						) + "</tr>"
 					);
 				}
@@ -88,6 +91,22 @@
 						item.style.display = "none";
 					}
 				}
+			}
+		}
+
+		async function gotoUpdate(id) {
+			document.querySelector(`#hehehe tr[id='${id}'] td[formthing]`).innerHTML = (
+				await fetch("./update.html").then((data) => {
+					return data.text();
+				})
+			)
+			document.querySelector(`#hehehe tr[id='${id}'] td[formthing] input#id`).value = id;
+			document.querySelector(`#hehehe tr[id='${id}'] td[formthing] input#id`).setAttribute("hidden", "");
+			for (let attribute of ["first_name", "last_name", "email_id"]) {
+				document.querySelector(`#hehehe tr[id='${id}'] td[formthing] input#${attribute}`).setAttribute(
+					attribute,
+					document.querySelector(`#hehehe tr[id='${id}']`).getAttribute(attribute)
+				);
 			}
 		}
 	</script>
