@@ -80,8 +80,8 @@ public class EmployeeController {
 	
 	@IgnoreMapping
 	@PostMapping(value = "/create")
-	public Employee createEmployee(@RequestBody Employee employee) {
-		return EmployeeUtil.save(employee);
+	public Employee createEmployee_ongoing(@RequestBody String employeeInfo) {
+		return this.createEmployee(employeeInfo);
 	}
 	
 	@DotMapping(extension = "html")
@@ -103,6 +103,9 @@ public class EmployeeController {
 				break;
 			}
 		}
+		if (firstName.equals("") || lastName.equals("") || emailId.equals("")){
+			return null;
+		}
 		
 		return EmployeeUtil.save(new Employee(firstName, lastName, emailId));
 	}
@@ -123,6 +126,11 @@ public class EmployeeController {
 		
 		Employee updatedEmployee = this.employeeRepository.save(employee);
 		return ResponseEntity.ok(updatedEmployee);
+	}
+
+	@PostMapping("/update")
+	public ResponseEntity<Employee> updateEmployee_ongoing(@RequestBody String employeeInfo){
+		return this.updateEmployee(employeeInfo);
 	}
 
 	@DotMapping(extension = "html")

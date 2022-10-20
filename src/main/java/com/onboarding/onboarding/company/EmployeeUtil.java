@@ -64,7 +64,12 @@ public class EmployeeUtil {
 			stm.setString(2, employee.getLastName());
 			stm.setString(3, employee.getEmailId());
 			stm.executeUpdate();
-			
+
+			/* fetch id that was assigned automatically */ {
+				ResultSet sqlResult = SqlConnection.execQuery("SELECT id FROM \"employee\" ORDER BY id DESC");
+				sqlResult.next();
+				employee.setId(sqlResult.getLong("id"));
+			}
 		} catch (SQLException e) {
 		}
 		return employee;
