@@ -45,13 +45,13 @@
 					const { id, firstName, lastName, emailId } = employee;
 					document.querySelector("#hehehe #result").innerHTML += (
 						`<tr id=${id} first_name="${firstName}" last_name="${lastName}" email_id="${emailId}">` + (
-							"<td>" + EscapeThing.htmlEscape(id) + "</td>"
+							`<td id="id">${EscapeThing.htmlEscape(id)}</td>`
 						) + (
-							"<td>" + EscapeThing.htmlEscape(firstName) + "</td>"
+							`<td id="first_name">${EscapeThing.htmlEscape(firstName)}</td>`
 						) + (
-							"<td>" + EscapeThing.htmlEscape(lastName) + "</td>"
+							`<td id="last_name">${EscapeThing.htmlEscape(lastName)}</td>`
 						) + (
-							"<td>" + EscapeThing.htmlEscape(emailId) + "</td>"
+							`<td id="email_id">${EscapeThing.htmlEscape(emailId)}</td>`
 						) + (
 							`<td formthing><button onclick="gotoUpdate(${id})">update</button></td>`
 						) + "</tr>"
@@ -95,17 +95,16 @@
 		}
 
 		async function gotoUpdate(id) {
-			document.querySelector(`#hehehe tr[id='${id}'] td[formthing]`).innerHTML = (
+			document.querySelector(`#hehehe tr[id="${id}"] td[formthing]`).innerHTML = (
 				await fetch("./update.html").then((data) => {
 					return data.text();
 				})
 			)
-			document.querySelector(`#hehehe tr[id='${id}'] td[formthing] input#id`).value = id;
-			document.querySelector(`#hehehe tr[id='${id}'] td[formthing] input#id`).setAttribute("hidden", "");
+			document.querySelector(`#hehehe tr[id="${id}"] td[formthing] input#id`).value = id;
+			document.querySelector(`#hehehe tr[id="${id}"] td[formthing] tr[field_id="id"]`).setAttribute("hidden", "");
 			for (let attribute of ["first_name", "last_name", "email_id"]) {
-				document.querySelector(`#hehehe tr[id='${id}'] td[formthing] input#${attribute}`).setAttribute(
-					attribute,
-					document.querySelector(`#hehehe tr[id='${id}']`).getAttribute(attribute)
+				document.querySelector(`#hehehe tr[id="${id}"] td[formthing] input#${attribute}`).value = (
+					document.querySelector(`#hehehe tr[id="${id}"]`).getAttribute(attribute)
 				);
 			}
 		}
