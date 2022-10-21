@@ -65,11 +65,10 @@ public class EmployeeUtil {
 			stm.setString(3, employee.getEmailId());
 			stm.executeUpdate();
 
-			/* fetch id that was assigned automatically */ {
-				ResultSet sqlResult = SqlConnection.execQuery("SELECT id FROM \"employee\" ORDER BY id DESC");
-				sqlResult.next();
-				employee.setId(sqlResult.getLong("id"));
-			}
+			ResultSet sqlResult = SqlConnection.execQuery("SELECT id FROM \"employee\" ORDER BY id DESC");
+			sqlResult.next();
+			employee.setId(sqlResult.getLong("id"));
+
 		} catch (SQLException e) {
 		}
 		return employee;
@@ -80,6 +79,7 @@ public class EmployeeUtil {
 			PreparedStatement stm = SqlConnection.sqlConnect().prepareStatement(
 				(
 					"UPDATE \"employee\""
+					
 				) + " " + (
 					"SET " + " " + (
 						"first_name = ?,"
