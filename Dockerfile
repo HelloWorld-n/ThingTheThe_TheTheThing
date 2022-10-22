@@ -1,4 +1,4 @@
 FROM thing
 RUN echo "Hi!"
-RUN /etc/init.d/postgresql start
+RUN echo ./mvnw clean install compile package generate-sources
 RUN echo "Bye!"

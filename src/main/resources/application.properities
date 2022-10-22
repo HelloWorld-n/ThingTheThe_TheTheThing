@@ -1,7 +1,8 @@
 spring.datasource.jdbc-url = jdbc:postgresql://[::1]:5432/postgres
 spring.datasource.name = postgres
-spring.datasource.username = user
 spring.datasource.database = postgres
+spring.datasource.username = postgres
+spring.datasource.password = password
 spring.jpa.show-sql = true
 spring.datasource.driver-class-name = org.postgresql.driver
 spring.jpa.database = postgresql
