@@ -21,7 +21,7 @@ import org.springframework.context.ApplicationContext;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class Onboarding {
-	private static final boolean debugOnThisClass = false;
+	private static final boolean debugOnThisClass = true;
 
 	public static void main(String[] args){
 		SpringApplication springApplication = new SpringApplication(Onboarding.class);
