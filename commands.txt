@@ -1,7 +1,6 @@
 docker network create tm--thing
 
 docker run -i -t -d -p 5432:5432 --network=tm--thing -e POSTGRES_PASSWORD=password -e POSTGRES_USER=postgres -e POSTGRES_DB=postgres -e POSTGRES_HOST_AUTH_METHOD=trust postgres
-docker run -i -t -d -p 8080:8080 --network=tm--thing thing
 
 docker run -e POSTGRES_PASSWORD=password -e POSTGRES_USER=postgres -e POSTGRES_DB=postgres -e POSTGRES_HOST_AUTH_METHOD=trust  -i -t -d -p 5432 -p 8080:8080 --network=tm--thing thing
 
