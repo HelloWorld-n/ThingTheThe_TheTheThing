@@ -1,6 +1,5 @@
 FROM postgres
 RUN echo "[!!!]"
-RUN /etc/init.d/postgres start
 
 FROM thing
 RUN ./mvnw clean install compile package generate-sources
