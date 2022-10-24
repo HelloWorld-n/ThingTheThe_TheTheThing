@@ -28,5 +28,5 @@ For best performance check `/prepare` then reset application。
 
 USING docker  
 * Compile isDone automatically
-* Run idDone manuallyy
+* Run idDone manually
 
