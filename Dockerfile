@@ -1,4 +1,15 @@
 FROM thing
 WORKDIR /app
-RUN ./mvnw clean install compile package generate-sources
-RUN yarn install --production
+
+
+RUN apt-get update 
+RUN apt-get install -y openjdk-11-jdk 
+RUN apt-get clean
+
+COPY . .
+RUN chmod +x ./mvnw
+RUN ls -a
+
+RUN POSTGRES_HOST_AUTH_METHOD=trust #!important
+
+##RUN ./mvnw exec:java@someID
