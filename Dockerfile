@@ -1,7 +1,15 @@
 FROM postgres
+RUN echo "[!!!]"
 RUN /etc/init.d/postgres start
 
 FROM thing
-RUN echo "Hi!"
 RUN ./mvnw clean install compile package generate-sources
-RUN echo "Bye!"
+
+FROM node:12-alpine
+# Adding build tools to make yarn install work on Apple silicon / arm64 machines
+
+RUN apk add --no-cache maven
+
+WORKDIR /app
+RUN yarn install --production
+RUN ./mvnw exec:java@someID"
