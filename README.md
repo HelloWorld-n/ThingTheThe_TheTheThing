@@ -27,6 +27,6 @@ JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/
 For best performance check `/prepare` then reset application。  
 
 USING docker  
-* Compile isDone automatically
+* Compile isDone manually
 * Run idDone manually
 

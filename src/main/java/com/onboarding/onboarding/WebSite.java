@@ -85,7 +85,7 @@ public class WebSite {
 		String result = "[";
 		try {
 			SqlConnection.execAlteringQuery(
-				"INSERT INTO randomThing(" + (
+				"INSERT INTO \"randomThing\"(" + (
 					"value" 
 				) + ") VALUES (" + (
 					"floor(random() * 16)"
@@ -101,7 +101,7 @@ public class WebSite {
 	public String page__randomThing_find(ModelMap Model) {
 		String result = "[";
 		try {
-			ResultSet sqlResult = SqlConnection.execQuery("SELECT * FROM randomThing;");
+			ResultSet sqlResult = SqlConnection.execQuery("SELECT * FROM \"randomThing\";");
 			
 			sqlResult.next();
 			while (true) {
@@ -130,7 +130,7 @@ public class WebSite {
 		String result = "{}";
 		try {
 			ResultSet sqlResult = SqlConnection.execQuery(
-				"SELECT * FROM randomThing WHERE id = " + id + ";"
+				"SELECT * FROM \"randomThing\" WHERE id = " + id + ";"
 			);
 			
 			sqlResult.next();
