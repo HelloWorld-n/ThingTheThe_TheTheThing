@@ -1,7 +1,7 @@
 docker network create tm--thing
 docker volume create my-volume
 
-docker run -i -t -d -p 5432:5432 --network=tm--thing -e POSTGRES_PASSWORD=password -e POSTGRES_USER=postgres -e POSTGRES_DB=postgres -e POSTGRES_HOST_AUTH_METHOD=trust -v my-volume:/vol/postgres postgres
+docker run -i -t -d -p 5432:5432 --network=tm--thing -e POSTGRES_PASSWORD=password -e POSTGRES_USER=postgres -e POSTGRES_DB=postgres -e POSTGRES_HOST_AUTH_METHOD=trust -v my-volume:/vol/thing postgres
 
 docker run -e POSTGRES_PASSWORD=password -e POSTGRES_USER=postgres -e POSTGRES_DgitB=postgres -e POSTGRES_HOST_AUTH_METHOD=trust  -i -t -d -p 5432 -p 8080:8080 --network=tm--thing -v my-volume:/vol/thing thing
 
